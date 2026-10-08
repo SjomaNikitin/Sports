@@ -3,12 +3,42 @@
   --primary-color: #588157;
   --accent-color: #3a5a40;
   --dark-color: #344e41;
+  --shadow-color: rgb(52 78 65 / 0.33);
   --background-color: #dad7cd;
   --light-color: #a3b18a;
   --padding-1: 8px;
   --padding-2: 16px;
   --padding-3: 24px;
   --padding-4: 32px;
+}
+
+.button{
+  border-radius: var(--padding-1);
+  border-style: solid;
+  border-color: var(--accent-color);
+  text-decoration: none;
+  font-family: "Rubik", cursive;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 2rem;
+  background-color: white;
+  transition:
+          transform 0.2s ease-in-out,
+          box-shadow 0.2s ease-in-out,
+          color 0.2s ease-in-out,
+          background-color 0.2s ease-in-out;
+
+  box-shadow: 0 1rem 2.5rem var(--shadow-color);
+  color: var(--dark-color);
+  padding: var(--padding-2);
+}
+
+.button:hover{
+  background-color: var(--dark-color);
+  transform: scale(1.2);
+  box-shadow: 0 1rem 2.5rem rgba(23, 32, 51, 0.12);
+  color: var(--background-color);
 }
 
 @media (max-width: 600px) {
@@ -81,31 +111,7 @@ h1 {
 
 .page-select-button{
   display: inline-block;
-  padding: var(--padding-2);
-  border-radius: var(--padding-1);
-  background-color: var(--accent-color);
-  border-style: none;
-  border-color: transparent;
-  color: var(--background-color);
-  text-decoration: none;
-  font-family: "Rubik", cursive;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
-  font-size: 2rem;
-  transition:
-          transform 0.2s ease-in-out,
-          box-shadow 0.2s ease-in-out,
-          background-color 0.2s ease-in-out;
 
-  box-shadow: none;
-
-}
-
-.page-select-button:hover{
-  background-color: var(--dark-color);
-  transform: scale(1.2);
-  box-shadow: 0 1rem 2.5rem rgba(23, 32, 51, 0.12);
 }
 
 .sport-list {
@@ -178,33 +184,8 @@ h1 {
     width: 50%;
   }
 
-  .ankieta-button{
+  .ankieta-button {
     display: inline-block;
-    padding: var(--padding-2);
-    border-radius: var(--padding-1);
-    background-color: var(--accent-color);
-    border-style: none;
-    border-color: transparent;
-    color: var(--background-color);
-    text-decoration: none;
-    font-family: "Rubik", cursive;
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 2rem;
-
-    transition:
-            transform 0.2s ease-in-out,
-            box-shadow 0.2s ease-in-out,
-            background-color 0.2s ease-in-out;
-
-    box-shadow: none;
-  }
-
-  .ankieta-button:hover{
-    transform: scale(1.1);
-    background-color: var(--dark-color);
-    box-shadow: 0 0.75rem 2rem rgba(23, 32, 51, 0.15);
   }
 }
 

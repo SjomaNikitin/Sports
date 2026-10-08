@@ -149,7 +149,7 @@ function App() {
       {currentPage === "home" && (
           <div class="ankieta-banner">
           <h2>Wybierz najepsze sporty dla siebie za pomocą ankiety!</h2>
-            <a href="../ankieta/" class="ankieta-button">Przejdź do ankiety</a>
+            <a href="./Ankieta/" class="ankieta-button">Przejdź do ankiety</a>
           </div>
       )}
 

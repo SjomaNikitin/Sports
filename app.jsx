@@ -152,6 +152,12 @@ function App() {
             <a href="./ankieta/" class="ankieta-button">Przejdź do ankiety</a>
           </div>
       )}
+
+      {currentPage === "home" && (
+          <h2 class={"category-title"}>
+            Poznaj różne sporty:
+          </h2>
+      )}
       {currentPage === "home" && (
         <section class="sport-list" aria-label="Lista sportów">
           {sports.map((sport) => (

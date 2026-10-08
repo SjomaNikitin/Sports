@@ -23,6 +23,16 @@
   #app{
     width: 95% !important;
   }
+
+  .ankieta-banner{
+    flex-direction: column !important;
+    h2{
+      width: 100% !important;
+      text-align: center !important;
+      margin: 0 !important;
+      margin-bottom: var(--padding-1) !important;
+    }
+  }
 }
 
 * {
@@ -195,6 +205,16 @@ h1 {
     transform: scale(1.1);
     background-color: var(--dark-color);
     box-shadow: 0 0.75rem 2rem rgba(23, 32, 51, 0.15);
-    
   }
+}
+
+.category-title{
+  color: var(--dark-color);
+  font-size: clamp(1.5rem, 5vw, 3rem);
+  font-family: "Rubik", cursive;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+  margin: 0;
+  margin-bottom: var(--padding-4);
 }

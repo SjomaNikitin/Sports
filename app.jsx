@@ -1,4 +1,7 @@
 import { render } from "preact";
+import { useEffect, useRef, useState } from "preact/hooks";
+import { getRecommendations, quizQuestions } from "./quiz.js";
+import { sports } from "./sports.js";
 import "./styles.css";
 
 const pages = [
@@ -8,108 +11,139 @@ const pages = [
   { id: "kontakt", label: "Kontakt", path: "Kontakt/" },
 ];
 
-const sports = [
-  {
-    name: "Ultimate frisbee",
-    description: "Bezkontaktowa gra drużynowa, w której zdobywa się punkty, łapiąc dysk w polu punktowym przeciwnika.",
-    imageUrl: "https://www.wroclaw.pl/beta2/files/news/81249/mainFrisbee.jpg",
-  },
-  {
-    name: "Dwubój",
-    description: "Dyscyplina składająca się z dwóch konkurencji rozgrywanych kolejno, na przykład biegu i jazdy na rowerze.",
-    imageUrl: "https://fitmade.pl/wp-content/uploads/2024/04/weightlifting.jpg",
-  },
-  {
-    name: "Padel",
-    description: "Dynamiczna gra rakietowa, zwykle dla czterech osób, łącząca elementy tenisa i squasha.",
-    imageUrl: "https://umtychy.pl/media/photos/10017590/original.jpg",
-  },
-  {
-    name: "Bike polo",
-    description: "Zespołowa odmiana polo, w której zawodnicy poruszają się na rowerach i uderzają piłkę specjalnymi kijami.",
-    imageUrl: "https://images.wsj.net/im-818811?width=1260&height=841",
-  },
-  {
-    name: "Bossaball",
-    description: "Widowiskowa gra łącząca siatkówkę, piłkę nożną i akrobatykę na dmuchanym boisku z trampolinami.",
-    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e4/Bossaball_in_%22El_Camp%C3%ADn%22.jpg/250px-Bossaball_in_%22El_Camp%C3%ADn%22.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
-  },
-  {
-    name: "Disc golf",
-    description: "Odmiana golfa, w której zamiast piłki i kijów rzuca się dyskiem do metalowych koszy.",
-    imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEcYVR5Z4aEg1NOyO0RHEOgoHC_nybvxeKA63rwMremw&s=10",
-  },
-  {
-    name: "Bouldering",
-    description: "Wspinaczka na niewysokich ścianach bez liny, zabezpieczona grubymi materacami.",
-    imageUrl: "https://voltboulderownia.pl/wp-content/uploads/2025/10/volt-boulderownia-wwa-03.webp",
-  },
-  {
-    name: "Calisthenics freestyle",
-    description: "Wykonywanie efektownych figur, obrotów i przejść na drążkach z wykorzystaniem ciężaru własnego ciała.",
-    imageUrl: "https://gymgeneration.ch/cdn/shop/articles/calisthenics-die-kunst-der-korperbeherrschung-445570_7dac5896-d3cc-4487-9263-e3a48bce897a.jpg?v=1785586956&width=1100",
-  },
-  {
-    name: "Fistball",
-    description: "Gra drużynowa podobna do siatkówki, w której piłkę odbija się ręką lub przedramieniem i pozwala jej raz odbić się od podłoża.",
-    imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRd8YBTC-6LqhNEXnhABpOgq-OlfJBrD_JWNZGQfeV12ZsuOXv-_ShpdEMf&s=10",
-  },
-  {
-    name: "Quad Ball",
-    description: "Kontaktowa gra drużynowa inspirowana quidditchem, łącząca elementy piłki ręcznej, rugby i zbijaka.",
-    imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTB2HIWUA2FTSsVZPrCe_a6DPuPvq-olZI1aKz1RnWCMw&s=10",
-  },
-  {
-    name: "Slackline",
-    description: "Chodzenie oraz wykonywanie figur na elastycznej taśmie rozwieszonej nisko nad ziemią.",
-    imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrhvu44NDeDAcWnaEXtY_1jxvvAAXz8uwjPIPhzuqVd9jk8JFkXmFhqcWw&s=10",
-  },
-  {
-    name: "Parkour",
-    description: "Sztuka sprawnego pokonywania miejskich lub naturalnych przeszkód za pomocą biegu, skoków i wspinania.",
-    imageUrl: "https://fun4sport.pl/data/include/img/news/1778842086.jpg",
-  },
-  {
-    name: "Crossminton",
-    description: "Szybka gra rakietowa przypominająca badminton, rozgrywana bez siatki przy użyciu cięższej i odporniejszej na wiatr lotki.",
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/b/b9/Speedminton_game_on_rooftop.jpg?utm_source=pl.wikipedia.org&utm_campaign=index&utm_content=original",
-  },
-  {
-    name: "Freestyle football",
-    description: "Wykonywanie trików i efektownych kombinacji z piłką nożną bez rozgrywania klasycznego meczu.",
-    imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNIZoJFhy7YLgOrXOSu8kkBnr64TbzlqmyMBSENXp6_g&s",
-  },
-  {
-    name: "Dodgebee",
-    description: "Bezpieczniejsza odmiana zbijaka, w której gracze rzucają miękkim dyskiem zamiast piłką.",
-    imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMEILw_y_--jhJA_HX6j7JVKPNuRHrIQtCHy0MEsi0JWqysvtSedAoazig&s=10",
-  },
-  {
-    name: "Rzut kaloszem",
-    description: "Sport polegający na rzucie kaloszem do konkretnego celu albo na jak najdalszy dystans.",
-    imageUrl: "https://www.projektefektywny.pl/wp-content/uploads/2020/07/rzut-kaloszem_HDR-300x200.jpg",
-  },
-  {
-    name: "Spikeball",
-    description: "Dynamiczna gra zespołowa, w której gracze odbijają piłkę w małą, okrągłą siatkę ustawioną przy ziemi.",
-    imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRU3PIZ79QW5Lx0NejWqJ1ePzNbBMxh3T2jJ53h1YKGEluWO0ax_eMy23s&s=10",
-  },
-  {
-    name: "Bule",
-    description: "Gra polegająca na rzucaniu metalowych kul jak najbliżej małej drewnianej kulki będącej celem.",
-    imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTovszLI1ckPiIGpLstCcZW5SJc7WS7--ejoWIiESEE18vDV9DfHiV-YSM&s=10",
-  },
-];
 
-function SportInfo({ name, description, imageUrl }) {
+function SportInfo({ name, description, imageUrl, heading: Heading = "h2", children }) {
   return (
     <article class="sport-info">
       <img class="sport-info-image" src={imageUrl} alt={name} />
       <div class="sport-info-content">
-        <h2>{name}</h2>
+        <Heading>{name}</Heading>
         <p>{description}</p>
+        {children}
       </div>
     </article>
+  );
+}
+
+function SportQuiz() {
+  const [answers, setAnswers] = useState({});
+  const [showResults, setShowResults] = useState(false);
+  const resultHeading = useRef(null);
+  const firstAnswer = useRef(null);
+  const answeredCount = quizQuestions.filter((question) => answers[question.id]).length;
+  const isComplete = answeredCount === quizQuestions.length;
+  const recommendations = showResults ? getRecommendations(sports, answers) : [];
+  const bestScore = recommendations[0]?.matches.length ?? 0;
+
+  useEffect(() => {
+    if (showResults) resultHeading.current?.focus();
+  }, [showResults]);
+
+  function resetQuiz() {
+    setAnswers({});
+    setShowResults(false);
+    firstAnswer.current?.focus();
+  }
+
+  return (
+    <section class="sport-quiz" aria-labelledby="quiz-title">
+      <header class="quiz-intro">
+        <h2 id="quiz-title" class="category-title">Znajdź sport dla siebie</h2>
+        <p>Odpowiedz na {quizQuestions.length} pytań i poznaj sporty z naszej listy, które pasują do Twoich preferencji.</p>
+      </header>
+
+      <div class="quiz-progress">
+        <label for="quiz-progress">Twoje odpowiedzi: {answeredCount} z {quizQuestions.length}</label>
+        <progress id="quiz-progress" max={quizQuestions.length} value={answeredCount} />
+      </div>
+
+      <form
+        class="quiz-form"
+        onSubmit={(event) => {
+          event.preventDefault();
+          if (isComplete) setShowResults(true);
+        }}
+        onReset={resetQuiz}
+      >
+        {quizQuestions.map((question, index) => (
+          <fieldset class="quiz-question" key={question.id}>
+            <legend>
+              <span class="quiz-question-number" aria-hidden="true">{index + 1}</span>
+              {question.title}
+            </legend>
+            <div class="quiz-options">
+              {question.options.map((option, optionIndex) => (
+                <label
+                  class={`quiz-option${answers[question.id] === option.value ? " is-selected" : ""}`}
+                  key={option.value}
+                >
+                  <input
+                    ref={index === 0 && optionIndex === 0 ? firstAnswer : undefined}
+                    type="radio"
+                    name={question.id}
+                    value={option.value}
+                    checked={answers[question.id] === option.value}
+                    required
+                    onChange={() => {
+                      setAnswers((previous) => ({ ...previous, [question.id]: option.value }));
+                      setShowResults(false);
+                    }}
+                  />
+                  <span>{option.label}</span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+        ))}
+
+        <p class="quiz-hint" id="quiz-hint" aria-live="polite">
+          {isComplete
+            ? "Gotowe! Sprawdź, które sporty pasują do Ciebie."
+            : "Zaznacz po jednej odpowiedzi w każdym pytaniu, aby zobaczyć wynik."}
+        </p>
+        <div class="quiz-actions">
+          <button class="button quiz-button quiz-submit" type="submit" disabled={!isComplete} aria-describedby="quiz-hint">
+            Pokaż pasujące sporty
+          </button>
+          <button class="button quiz-button" type="reset">Zacznij od nowa</button>
+        </div>
+      </form>
+
+      {showResults && (
+        <section class="quiz-results" aria-labelledby="quiz-results-title">
+          <h2 id="quiz-results-title" class="category-title" ref={resultHeading} tabIndex={-1}>Sporty dla Ciebie</h2>
+          <p class="quiz-result-summary">
+            {bestScore === quizQuestions.length
+              ? "Te sporty pasują do wszystkich Twoich odpowiedzi. Wybierz ten, który najbardziej Cię zaciekawi!"
+              : `Nie ma sportu pasującego do wszystkich odpowiedzi. Każda z najbliższych propozycji pasuje do ${bestScore} z ${quizQuestions.length} Twoich preferencji.`}
+          </p>
+          <p class="quiz-hint">Dostępność zależy od pogody i obiektów w Twojej okolicy.</p>
+          <div class="sport-list">
+            {recommendations.map(({ sport, matches }) => (
+              <SportInfo key={sport.name} {...sport} heading="h3">
+                <p class="quiz-match-count">Dopasowanie: {matches.length} z {quizQuestions.length}</p>
+                <ul class="quiz-match-list" aria-label="Porównanie z Twoimi odpowiedziami">
+                  {quizQuestions.map((question) => {
+                    const isMatch = matches.includes(question);
+                    const labels = question.options
+                      .filter((option) => sport.preferences[question.id]?.includes(option.value))
+                      .map((option) => option.label)
+                      .join(" / ");
+
+                    return (
+                      <li key={question.id} class={isMatch ? "quiz-match" : "quiz-mismatch"}>
+                        <span aria-hidden="true">{isMatch ? "✓" : "–"}</span>
+                        <span><strong>{question.title}:</strong> {labels}{!isMatch && " (inna preferencja)"}</span>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </SportInfo>
+            ))}
+          </div>
+        </section>
+      )}
+    </section>
   );
 }
 
@@ -127,13 +161,12 @@ function getPageHref(page, currentPage) {
   return `${root}${page.path}`;
 }
 
-function App() {
-  const currentPage = getCurrentPage();
+function PageHeader({ currentPage }) {
   const navigation = pages.filter((page) => page.id !== currentPage);
 
   return (
-    <main>
-      <h1>Grałeś już?</h1>
+    <>
+      <h1>Sportnisz</h1>
 
       <nav class="page-select" aria-label="Główna nawigacja">
         {navigation.map((page) => (
@@ -146,6 +179,17 @@ function App() {
           </a>
         ))}
       </nav>
+    </>
+  );
+}
+
+function App() {
+  const currentPage = getCurrentPage();
+
+  return (
+    <main class={currentPage === "ankieta" ? "quiz-page" : undefined}>
+      <PageHeader currentPage={currentPage} />
+      {currentPage === "ankieta" && <SportQuiz />}
       {currentPage === "home" && (
           <div class="ankieta-banner">
           <h2>Wybierz najepsze sporty dla siebie za pomocą ankiety!</h2>
@@ -174,4 +218,10 @@ function App() {
   );
 }
 
-render(<App />, document.querySelector("#app"));
+const headerRoot = document.querySelector("#page-header");
+
+if (headerRoot) {
+  render(<PageHeader currentPage={getCurrentPage()} />, headerRoot);
+} else {
+  render(<App />, document.querySelector("#app"));
+}

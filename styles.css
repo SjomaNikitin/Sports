@@ -4,7 +4,7 @@
   --accent-color: #3a5a40;
   --dark-color: #344e41;
   --shadow-color: rgb(52 78 65 / 0.33);
-  --background-color: #dad7cd;
+  --background-color: #efefea;
   --light-color: #a3b18a;
   --padding-1: 8px;
   --padding-2: 16px;
@@ -146,10 +146,12 @@ h1 {
   padding: var(--padding-2);
 }
 
-.sport-info-content h2 {
+.sport-info-content h2,
+.sport-info-content h3 {
   margin: 0 0 var(--padding-1);
   color: var(--dark-color);
   font-family: "Rubik", sans-serif;
+  font-size: 1.5rem;
 }
 
 .sport-info-content p {
@@ -198,4 +200,241 @@ h1 {
   font-style: normal;
   margin: 0;
   margin-bottom: var(--padding-4);
+}
+
+.sport-quiz {
+  margin-top: var(--padding-4);
+  color: var(--dark-color);
+  text-align: left;
+}
+
+.quiz-intro {
+  text-align: center;
+}
+
+.sport-quiz .category-title {
+  margin-bottom: var(--padding-2);
+}
+
+.quiz-intro p,
+.quiz-result-summary {
+  margin: 0;
+  line-height: 1.6;
+}
+
+.quiz-progress {
+  display: grid;
+  gap: var(--padding-1);
+  margin: var(--padding-4) 0;
+  font-family: "Rubik", sans-serif;
+  font-size: 0.9rem;
+}
+
+.quiz-progress progress {
+  appearance: none;
+  width: 100%;
+  height: var(--padding-1);
+  overflow: hidden;
+  border: 0;
+  border-radius: var(--padding-1);
+  background-color: var(--background-color);
+  accent-color: var(--primary-color);
+}
+
+.quiz-progress progress::-webkit-progress-bar {
+  background-color: var(--background-color);
+}
+
+.quiz-progress progress::-webkit-progress-value {
+  background-color: var(--primary-color);
+  border-radius: var(--padding-1);
+}
+
+.quiz-progress progress::-moz-progress-bar {
+  background-color: var(--primary-color);
+  border-radius: var(--padding-1);
+}
+
+.quiz-form {
+  display: grid;
+  gap: var(--padding-3);
+}
+
+.quiz-question {
+  min-width: 0;
+  margin: 0;
+  padding: var(--padding-2);
+  border: 1px solid var(--light-color);
+  border-radius: var(--padding-2);
+}
+
+.quiz-question legend {
+  padding: 0 var(--padding-1);
+  font-family: "Rubik", sans-serif;
+  font-size: 1.15rem;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+.quiz-question-number {
+  display: inline-grid;
+  place-items: center;
+  width: var(--padding-4);
+  height: var(--padding-4);
+  margin-right: var(--padding-1);
+  border-radius: 50%;
+  background-color: var(--accent-color);
+  color: var(--background-color);
+  font-size: 1rem;
+}
+
+.quiz-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--padding-2);
+}
+
+.quiz-option {
+  display: flex;
+  align-items: center;
+  gap: var(--padding-1);
+  min-height: 64px;
+  padding: var(--padding-2);
+  border: 2px solid transparent;
+  border-radius: var(--padding-1);
+  background-color: var(--background-color);
+  font-family: "Rubik", sans-serif;
+  cursor: pointer;
+  transition: border-color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+
+.quiz-option:hover {
+  border-color: var(--primary-color);
+}
+
+.quiz-option.is-selected {
+  border-color: var(--accent-color);
+  background-color: var(--light-color);
+}
+
+.quiz-option input {
+  flex-shrink: 0;
+  width: 1.2rem;
+  height: 1.2rem;
+  margin: 0;
+  accent-color: var(--accent-color);
+}
+
+.quiz-option:focus-within,
+.quiz-button:focus-visible,
+#quiz-results-title:focus-visible {
+  outline: 3px solid var(--primary-color);
+  outline-offset: 4px;
+}
+
+.quiz-hint {
+  margin: var(--padding-1) 0 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.quiz-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--padding-2);
+}
+
+.quiz-button {
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: none;
+}
+
+.quiz-button:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.quiz-submit {
+  background-color: var(--accent-color);
+  color: var(--background-color);
+}
+
+.quiz-submit:disabled {
+  border-color: var(--light-color);
+  background-color: var(--background-color);
+  color: var(--dark-color);
+  cursor: not-allowed;
+}
+
+.quiz-results {
+  margin-top: var(--padding-4);
+  padding-top: var(--padding-4);
+  border-top: 2px solid var(--light-color);
+}
+
+.sport-info-content .quiz-match-count {
+  margin-top: var(--padding-2);
+  font-weight: 700;
+}
+
+.quiz-match-list {
+  display: grid;
+  gap: var(--padding-1);
+  margin: var(--padding-2) 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.quiz-match-list li {
+  display: flex;
+  gap: var(--padding-1);
+}
+
+.quiz-match {
+  color: var(--accent-color);
+}
+
+.quiz-mismatch {
+  color: var(--dark-color);
+}
+
+@media (max-width: 1000px) {
+  .quiz-page {
+    padding: var(--padding-3);
+  }
+
+  .quiz-page .page-select {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .quiz-page .page-select-button {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .quiz-page {
+    padding: var(--padding-2);
+  }
+
+  .quiz-options {
+    grid-template-columns: 1fr;
+  }
+
+  .quiz-button {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sport-quiz .quiz-option,
+  .sport-quiz .button,
+  .sport-quiz .sport-info {
+    transition: none;
+    transform: none;
+  }
 }

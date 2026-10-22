@@ -12,7 +12,7 @@
   --padding-4: 32px;
 }
 
-.button{
+.button {
   border-radius: var(--padding-1);
   border-style: solid;
   border-color: var(--accent-color);
@@ -24,17 +24,17 @@
   font-size: 2rem;
   background-color: white;
   transition:
-          transform 0.2s ease-in-out,
-          box-shadow 0.2s ease-in-out,
-          color 0.2s ease-in-out,
-          background-color 0.2s ease-in-out;
+    transform 0.2s ease-in-out,
+    box-shadow 0.2s ease-in-out,
+    color 0.2s ease-in-out,
+    background-color 0.2s ease-in-out;
 
   box-shadow: 0 1rem 2.5rem var(--shadow-color);
   color: var(--dark-color);
   padding: var(--padding-2);
 }
 
-.button:hover{
+.button:hover {
   background-color: var(--dark-color);
   transform: scale(1.2);
   box-shadow: 0 1rem 2.5rem rgba(23, 32, 51, 0.12);
@@ -50,13 +50,14 @@
     width: 100%;
   }
 
-  #app{
+  #app {
     width: 95% !important;
   }
 
-  .ankieta-banner{
+  .ankieta-banner {
     flex-direction: column !important;
-    h2{
+
+    h2 {
       width: 100% !important;
       text-align: center !important;
       margin: 0 !important;
@@ -99,7 +100,19 @@ h1 {
   margin-bottom: var(--padding-2);
 }
 
-.page-select{
+h2 {
+  color: var(--dark-color);
+  font-size: clamp(1.5rem, 6vw, 3rem);
+  font-family: "Rubik", cursive;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+  margin: 0;
+  margin-bottom: var(--padding-2);
+}
+
+
+.page-select {
   width: 90%;
   padding: var(--padding-2);
   display: flex;
@@ -109,7 +122,7 @@ h1 {
   justify-content: center;
 }
 
-.page-select-button{
+.page-select-button {
   display: inline-block;
 
 }
@@ -159,11 +172,11 @@ h1 {
   line-height: 1.5;
 }
 
-#app{
+#app {
   width: 60%;
 }
 
-.ankieta-banner{
+.ankieta-banner {
   width: 100%;
   padding: var(--padding-4);
   border-style: solid;
@@ -176,7 +189,7 @@ h1 {
   margin-top: var(--padding-4);
   margin-bottom: var(--padding-4);
 
-  h2{
+  h2 {
     font-size: 2rem;
     font-weight: 600;
     font-style: normal;
@@ -191,7 +204,7 @@ h1 {
   }
 }
 
-.category-title{
+.category-title {
   color: var(--dark-color);
   font-size: clamp(1.5rem, 5vw, 3rem);
   font-family: "Rubik", cursive;
@@ -431,10 +444,28 @@ h1 {
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   .sport-quiz .quiz-option,
   .sport-quiz .button,
   .sport-quiz .sport-info {
     transition: none;
     transform: none;
+  }
+}
+
+.event-info-container {
+
+  display: flex;
+  justify-content: left;
+
+  p {
+    width: 50%;
+    font-size: 1.5 rem;
+  }
+
+  img {
+    width: 50%;
+    height: auto;
+    border-radius: var(--padding-1);
   }
 }

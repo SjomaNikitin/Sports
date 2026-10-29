@@ -1,3 +1,4 @@
+import Icon from "../Icon.jsx";
 import { useRef, useState } from "preact/hooks";
 import { buttonGlow } from "../button-glow.js";
 import ultimateImage from "../assets/event/ultimate-frisbee.jpg";
@@ -129,7 +130,7 @@ function EventSports() {
             >
               <span class="event-tab-number" aria-hidden="true">0{index + 1}</span>
               <span class="event-tab-name">{sport.name}</span>
-              <span class="event-tab-arrow" aria-hidden="true">↗</span>
+              <span class="event-tab-arrow" aria-hidden="true"><Icon name="arrow-up-right" /></span>
             </button>
           ))}
         </div>
@@ -154,7 +155,7 @@ function EventSports() {
               <h3>{sport.name}</h3>
               <p>{sport.description}</p>
             </div>
-            <span class="event-sport-mark" aria-hidden="true">↗</span>
+            <span class="event-sport-mark" aria-hidden="true"><Icon name="arrow-up-right" /></span>
           </div>
         ))}
         <p class="event-sports-footnote"><span>JEDNO WYDARZENIE. CZTERY MOŻLIWOŚCI.</span><span aria-hidden="true">SPRT / 04</span></p>

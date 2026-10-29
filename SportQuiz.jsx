@@ -1,3 +1,4 @@
+import Icon from "./Icon.jsx";
 import { useEffect, useRef, useState } from "preact/hooks";
 import { getRecommendations, quizQuestions } from "./quiz.js";
 import { sports } from "./sports.js";
@@ -41,7 +42,7 @@ export default function SportQuiz() {
           <progress id="quiz-progress" max={quizQuestions.length} value={answeredCount} />
         </div>
         <p>Bez złych odpowiedzi.<br />Po prostu po Twojemu.</p>
-        <span class="quiz-sidebar-arrow" aria-hidden="true">↘</span>
+        <span class="quiz-sidebar-arrow" aria-hidden="true"><Icon name="arrow-down-right" /></span>
       </aside>
 
       <form
@@ -76,7 +77,7 @@ export default function SportQuiz() {
                       setShowResults(false);
                     }}
                   />
-                  <span>{option.label}</span><span class="quiz-option-mark" aria-hidden="true">↗</span>
+                  <span>{option.label}</span><span class="quiz-option-mark" aria-hidden="true"><Icon name="arrow-up-right" /></span>
                 </label>
               ))}
             </div>
@@ -120,7 +121,7 @@ export default function SportQuiz() {
 
                     return (
                       <li key={question.id} class={isMatch ? "quiz-match" : "quiz-mismatch"}>
-                        <span aria-hidden="true">{isMatch ? "✓" : "–"}</span>
+                        <span aria-hidden="true"><Icon name={isMatch ? "check" : "minus"} /></span>
                         <span><strong>{question.title}:</strong> {labels}{!isMatch && " (inna preferencja)"}</span>
                       </li>
                     );

@@ -1,3 +1,4 @@
+import Icon from "./Icon.jsx";
 import { useState } from "preact/hooks";
 import ultimateImage from "./assets/event/ultimate-frisbee.jpg";
 import spikeballImage from "./assets/event/spikeball.jpg";
@@ -16,9 +17,9 @@ export default function SportCard({ name, description, imageUrl, index = 0, chil
               <img class="sport-info-image" src={localImages[name] || imageUrl} alt="" loading="lazy" onError={() => setImageFailed(true)} />
             )}
             <span class="sport-card-index">{String(index + 1).padStart(2, "0")}</span>
-            <span class="sport-image-action" aria-hidden="true">POZNAJ SPORT ↗</span>
+            <span class="sport-image-action" aria-hidden="true">POZNAJ SPORT <Icon name="arrow-up-right" /></span>
           </div>
-          <div class="sport-card-heading"><h3>{name}</h3><span class="sport-card-plus" aria-hidden="true">+</span></div>
+          <div class="sport-card-heading"><h3>{name}</h3><span class="sport-card-plus" aria-hidden="true"><Icon name="plus" /></span></div>
         </summary>
         <div class="sport-info-content"><p>{description}</p>{children}</div>
       </details>

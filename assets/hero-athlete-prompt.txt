@@ -1,0 +1,11 @@
+Generated with the built-in image_gen tool; transparent_background: true.
+
+Use case: ads-marketing
+Asset type: transparent cutout for a minimal sports event website hero.
+Primary request: Original monochrome photoreal editorial portrait of a young adult male athlete seen directly from behind, standing upright in a relaxed confident stance, with no face visible. He wears a loose black technical T-shirt and black athletic shorts and holds one plain white frisbee naturally down at his side.
+Scene/backdrop: genuinely transparent alpha background, isolated clean cutout, no floor or backdrop.
+Style/medium: understated premium sportswear campaign photography; realistic human anatomy and cloth texture, polished but natural.
+Composition/framing: portrait approximately 4:5, centered subject shown from head to mid-thigh, large in frame with small breathing room above head, arms and frisbee fully within frame.
+Lighting/mood: soft directional studio light revealing the folds of the black shirt and a gentle rim on shoulders, calm confidence.
+Color palette: strictly black and white grayscale; no orange, no color anywhere. A website will add its own orange graphic behind him later.
+Constraints: original fictional subject; no logos, no text, no numbers, no watermark. Crisp natural silhouette edges and genuine transparency. Do not create a website mockup; produce only the isolated athlete cutout.

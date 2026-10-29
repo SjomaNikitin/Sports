@@ -1,0 +1,26 @@
+Event photography (Wikimedia Commons)
+
+ultimate-frisbee.jpg
+James White Flick.jpg — Evanf32
+https://commons.wikimedia.org/wiki/File:James_White_Flick.jpg
+CC0 1.0: https://creativecommons.org/publicdomain/zero/1.0/
+
+kubb.jpg
+Kubb throw from 8m.jpg — FabioVi
+https://commons.wikimedia.org/wiki/File:Kubb_throw_from_8m.jpg
+CC BY-SA 4.0: https://creativecommons.org/licenses/by-sa/4.0/
+
+beach-paddle-action.jpg
+Playing matkot.jpg — shira gal
+https://commons.wikimedia.org/wiki/File:Playing_matkot.jpg
+CC BY 2.0: https://creativecommons.org/licenses/by/2.0/
+
+spikeball.jpg
+Spikeball game.jpg — Esmé James (@ezy_bezzie)
+https://commons.wikimedia.org/wiki/File:Spikeball_game.jpg
+CC BY-SA 4.0: https://creativecommons.org/licenses/by-sa/4.0/
+
+The Ultimate Frisbee, Kubb, and SpikeBall files are 1280px Wikimedia
+thumbnails; Beach Paddle is the original file. Photos are cropped for
+display using CSS object-fit. Each photo retains its listed license.
+Attribution is also available in the event page's photo credits.

@@ -1,7 +1,12 @@
 import { render } from "preact";
-import { useEffect, useRef, useState } from "preact/hooks";
-import { getRecommendations, quizQuestions } from "./quiz.js";
-import { sports } from "./sports.js";
+import { useState } from "preact/hooks";
+import HomePage from "./HomePage.jsx";
+import SportQuiz from "./SportQuiz.jsx";
+import EventPage from "./Event/EventPage.jsx";
+import ContactPage from "./Kontakt/ContactPage.jsx";
+import { buttonGlow } from "./button-glow.js";
+import { usePageMotion } from "./use-page-motion.js";
+import logo from "./assets/sportnisz-logo.svg";
 import "./styles.css";
 
 const pages = [
@@ -11,217 +16,60 @@ const pages = [
   { id: "kontakt", label: "Kontakt", path: "Kontakt/" },
 ];
 
-
-function SportInfo({ name, description, imageUrl, heading: Heading = "h2", children }) {
-  return (
-    <article class="sport-info">
-      <img class="sport-info-image" src={imageUrl} alt={name} />
-      <div class="sport-info-content">
-        <Heading>{name}</Heading>
-        <p>{description}</p>
-        {children}
-      </div>
-    </article>
-  );
-}
-
-function SportQuiz() {
-  const [answers, setAnswers] = useState({});
-  const [showResults, setShowResults] = useState(false);
-  const resultHeading = useRef(null);
-  const firstAnswer = useRef(null);
-  const answeredCount = quizQuestions.filter((question) => answers[question.id]).length;
-  const isComplete = answeredCount === quizQuestions.length;
-  const recommendations = showResults ? getRecommendations(sports, answers) : [];
-  const bestScore = recommendations[0]?.matches.length ?? 0;
-
-  useEffect(() => {
-    if (showResults) resultHeading.current?.focus();
-  }, [showResults]);
-
-  function resetQuiz() {
-    setAnswers({});
-    setShowResults(false);
-    firstAnswer.current?.focus();
-  }
-
-  return (
-    <section class="sport-quiz" aria-labelledby="quiz-title">
-      <header class="quiz-intro">
-        <h2 id="quiz-title" class="category-title">Znajdź sport dla siebie</h2>
-        <p>Odpowiedz na {quizQuestions.length} pytań i poznaj sporty z naszej listy, które pasują do Twoich preferencji.</p>
-      </header>
-
-      <div class="quiz-progress">
-        <label for="quiz-progress">Twoje odpowiedzi: {answeredCount} z {quizQuestions.length}</label>
-        <progress id="quiz-progress" max={quizQuestions.length} value={answeredCount} />
-      </div>
-
-      <form
-        class="quiz-form"
-        onSubmit={(event) => {
-          event.preventDefault();
-          if (isComplete) setShowResults(true);
-        }}
-        onReset={resetQuiz}
-      >
-        {quizQuestions.map((question, index) => (
-          <fieldset class="quiz-question" key={question.id}>
-            <legend>
-              <span class="quiz-question-number" aria-hidden="true">{index + 1}</span>
-              {question.title}
-            </legend>
-            <div class="quiz-options">
-              {question.options.map((option, optionIndex) => (
-                <label
-                  class={`quiz-option${answers[question.id] === option.value ? " is-selected" : ""}`}
-                  key={option.value}
-                >
-                  <input
-                    ref={index === 0 && optionIndex === 0 ? firstAnswer : undefined}
-                    type="radio"
-                    name={question.id}
-                    value={option.value}
-                    checked={answers[question.id] === option.value}
-                    required
-                    onChange={() => {
-                      setAnswers((previous) => ({ ...previous, [question.id]: option.value }));
-                      setShowResults(false);
-                    }}
-                  />
-                  <span>{option.label}</span>
-                </label>
-              ))}
-            </div>
-          </fieldset>
-        ))}
-
-        <p class="quiz-hint" id="quiz-hint" aria-live="polite">
-          {isComplete
-            ? "Gotowe! Sprawdź, które sporty pasują do Ciebie."
-            : "Zaznacz po jednej odpowiedzi w każdym pytaniu, aby zobaczyć wynik."}
-        </p>
-        <div class="quiz-actions">
-          <button class="button quiz-button quiz-submit" type="submit" disabled={!isComplete} aria-describedby="quiz-hint">
-            Pokaż pasujące sporty
-          </button>
-          <button class="button quiz-button" type="reset">Zacznij od nowa</button>
-        </div>
-      </form>
-
-      {showResults && (
-        <section class="quiz-results" aria-labelledby="quiz-results-title">
-          <h2 id="quiz-results-title" class="category-title" ref={resultHeading} tabIndex={-1}>Sporty dla Ciebie</h2>
-          <p class="quiz-result-summary">
-            {bestScore === quizQuestions.length
-              ? "Te sporty pasują do wszystkich Twoich odpowiedzi. Wybierz ten, który najbardziej Cię zaciekawi!"
-              : `Nie ma sportu pasującego do wszystkich odpowiedzi. Każda z najbliższych propozycji pasuje do ${bestScore} z ${quizQuestions.length} Twoich preferencji.`}
-          </p>
-          <p class="quiz-hint">Dostępność zależy od pogody i obiektów w Twojej okolicy.</p>
-          <div class="sport-list">
-            {recommendations.map(({ sport, matches }) => (
-              <SportInfo key={sport.name} {...sport} heading="h3">
-                <p class="quiz-match-count">Dopasowanie: {matches.length} z {quizQuestions.length}</p>
-                <ul class="quiz-match-list" aria-label="Porównanie z Twoimi odpowiedziami">
-                  {quizQuestions.map((question) => {
-                    const isMatch = matches.includes(question);
-                    const labels = question.options
-                      .filter((option) => sport.preferences[question.id]?.includes(option.value))
-                      .map((option) => option.label)
-                      .join(" / ");
-
-                    return (
-                      <li key={question.id} class={isMatch ? "quiz-match" : "quiz-mismatch"}>
-                        <span aria-hidden="true">{isMatch ? "✓" : "–"}</span>
-                        <span><strong>{question.title}:</strong> {labels}{!isMatch && " (inna preferencja)"}</span>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </SportInfo>
-            ))}
-          </div>
-        </section>
-      )}
-    </section>
-  );
-}
-
 function getCurrentPage() {
   const path = window.location.pathname.toLowerCase();
-
-  if (path.includes("/ankieta/")) return "ankieta";
-  if (path.includes("/event/")) return "event";
-  if (path.includes("/kontakt/")) return "kontakt";
+  if (/\/ankieta(?:\/|$)/.test(path)) return "ankieta";
+  if (/\/event(?:\/|$)/.test(path)) return "event";
+  if (/\/kontakt(?:\/|$)/.test(path)) return "kontakt";
   return "home";
 }
 
 function getPageHref(page, currentPage) {
-  const root = currentPage === "home" ? "./" : "../";
-  return `${root}${page.path}`;
+  return `${currentPage === "home" ? "./" : "../"}${page.path}`;
 }
 
 function PageHeader({ currentPage }) {
-  const navigation = pages.filter((page) => page.id !== currentPage);
-
+  const [menuOpen, setMenuOpen] = useState(false);
   return (
-    <>
-      <h1>Sportnisz</h1>
-
-      <nav class="page-select" aria-label="Główna nawigacja">
-        {navigation.map((page) => (
-          <a
-            class="page-select-button button"
-            href={getPageHref(page, currentPage)}
-            key={page.id}
-          >
-            {page.label}
-          </a>
-        ))}
+    <header class="site-header page-width">
+      <a href={getPageHref(pages[0], currentPage)} class="site-logo" aria-label="Sportnisz — strona główna"><img src={logo} alt="" width="1405" height="765" /></a>
+      <button class="menu-toggle" type="button" aria-expanded={menuOpen} aria-controls="main-navigation" onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? "Zamknij" : "Menu"}<span aria-hidden="true">{menuOpen ? "−" : "+"}</span></button>
+      <nav id="main-navigation" class={`site-navigation${menuOpen ? " is-open" : ""}`} aria-label="Główna nawigacja" onKeyDown={(event) => { if (event.key === "Escape") { setMenuOpen(false); document.querySelector('.menu-toggle')?.focus(); } }}>
+        {pages.map((page, index) => <a key={page.id} href={getPageHref(page, currentPage)} class={page.id === currentPage ? "is-current" : ""} aria-current={page.id === currentPage ? "page" : undefined}><span class="nav-index" aria-hidden="true">0{index}</span>{page.label}</a>)}
       </nav>
-    </>
+      <a {...buttonGlow} href={getPageHref(pages[2], currentPage)} class="button header-cta">Dołącz do gry <span aria-hidden="true">↗</span></a>
+    </header>
+  );
+}
+
+function PageFooter({ currentPage }) {
+  return (
+    <footer class="site-footer">
+      <div class="page-width">
+        <div class="footer-top"><a class="wordmark" href={getPageHref(pages[0], currentPage)}>sportnisz<span aria-hidden="true">*</span></a><p>Mniej schematów.<br />Więcej ruchu.</p><a class="text-link" href="mailto:sportnisz@gmail.com">Porozmawiajmy <span aria-hidden="true">↗</span></a></div>
+        <div class="footer-bottom"><span>SPORTNISZ / SPORT POZA SCHEMATEM</span><nav aria-label="Nawigacja w stopce">{pages.map((page) => <a key={page.id} href={getPageHref(page, currentPage)}>{page.label}</a>)}</nav><a href="#top">DO GÓRY ↑</a></div>
+      </div>
+    </footer>
   );
 }
 
 function App() {
   const currentPage = getCurrentPage();
-
+  usePageMotion();
   return (
-    <main class={currentPage === "ankieta" ? "quiz-page" : undefined}>
+    <>
+      <a class="skip-link" href="#main-content">Przejdź do treści</a>
+      <div id="top" />
       <PageHeader currentPage={currentPage} />
-      {currentPage === "ankieta" && <SportQuiz />}
-      {currentPage === "home" && (
-          <div class="ankieta-banner">
-          <h2>Wybierz najepsze sporty dla siebie za pomocą ankiety!</h2>
-            <a href="./Ankieta/" class="ankieta-button button">Przejdź do ankiety</a>
-          </div>
-      )}
-
-      {currentPage === "home" && (
-          <h2 class={"category-title"}>
-            Poznaj różne sporty:
-          </h2>
-      )}
-      {currentPage === "home" && (
-        <section class="sport-list" aria-label="Lista sportów">
-          {sports.map((sport) => (
-            <SportInfo
-              key={sport.name}
-              name={sport.name}
-              description={sport.description}
-              imageUrl={sport.imageUrl}
-            />
-          ))}
-        </section>
-      )}
-    </main>
+      <main id="main-content" class={`${currentPage}-page`}>
+        {currentPage === "home" && <HomePage />}
+        {currentPage === "ankieta" && <SportQuiz />}
+        {currentPage === "event" && <EventPage />}
+        {currentPage === "kontakt" && <ContactPage />}
+      </main>
+      <PageFooter currentPage={currentPage} />
+    </>
   );
 }
 
-const headerRoot = document.querySelector("#page-header");
-
-if (headerRoot) {
-  render(<PageHeader currentPage={getCurrentPage()} />, headerRoot);
-} else {
-  render(<App />, document.querySelector("#app"));
-}
+render(<App />, document.querySelector("#app"));

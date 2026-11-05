@@ -61,11 +61,25 @@ const eventSports = [
   },
 ];
 
-// Keep these placeholders until the final event information is ready.
 const eventCards = [
-  { title: "Spotkajmy się\nw ruchu.", label: "O wydarzeniu", sport: eventSports[0] },
-  { title: "Dobra ekipa.\nDobry dzień.", label: "Wspólnie i aktywnie", sport: eventSports[1] },
-  { title: "Po prostu\ndołącz.", label: "Miejsce dla Ciebie", sport: eventSports[2] },
+  {
+    title: "Cztery sporty.\nJeden dobry dzień.",
+    label: "O wydarzeniu",
+    description: "Ultimate Frisbee, Kubb, Beach Paddle i SpikeBall. Spróbuj każdego i znajdź swój ruch.",
+    sport: eventSports[0],
+  },
+  {
+    title: "Gramy razem.\nBez spiny.",
+    label: "Wspólnie i aktywnie",
+    description: "Przyjdź sam lub z ekipą. Zasady poznasz na miejscu, a resztę zrobi wspólna energia.",
+    sport: eventSports[1],
+  },
+  {
+    title: "Wpadnij.\nSpróbuj. Zostań.",
+    label: "Miejsce dla Ciebie",
+    description: "Nie potrzebujesz doświadczenia ani własnego sprzętu. Wystarczą wygodne buty i chęć do gry.",
+    sport: eventSports[2],
+  },
 ];
 
 function EventSports() {

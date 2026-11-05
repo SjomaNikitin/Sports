@@ -28,12 +28,12 @@ export default function EventScrollStory({ cards }) {
             <span class="event-intro-watermark" aria-hidden="true">PLAY</span>
           </header>
 
-          {cards.map(({ title, label, sport }, index) => (
+          {cards.map(({ title, label, description, sport }, index) => (
             <article class={`event-scene event-scene-story page-width${index % 2 ? " event-scene-reversed" : ""}`} id={`event-scene-${index + 1}`} key={label} aria-labelledby={`event-scene-title-${index + 1}`}>
               <div class="event-scene-copy">
                 <p class="event-scene-kicker"><span>0{index + 1}</span> {label}</p>
                 <h2 id={`event-scene-title-${index + 1}`}>{title}</h2>
-                <p class="event-scene-placeholder">Bla bla bla, bla bla bla.<br />Bla bla bla, bla bla bla, bla bla bla.</p>
+                <p class="event-scene-description">{description}</p>
                 <span class="event-scene-sign" aria-hidden="true"><Icon name={index === 1 ? "arrow-up-right" : "plus"} /></span>
               </div>
               <figure class="event-scene-figure">

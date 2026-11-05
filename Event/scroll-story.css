@@ -54,7 +54,7 @@
 .event-scene-reversed .event-scene-figure { grid-column: 1; grid-row: 1; }
 .event-scene-copy { position: relative; z-index: 2; }
 .event-scene-copy h2 { margin: 0 0 28px; font-size: clamp(2.6rem, 5vw, 5.8rem); font-weight: 500; line-height: 1.02; letter-spacing: -0.065em; white-space: pre-line; }
-.event-scene-placeholder { margin: 0; color: var(--muted-color); font-size: 0.85rem; line-height: 1.7; }
+.event-scene-description { margin: 0; max-width: 42ch; color: var(--muted-color); font-size: 0.85rem; line-height: 1.7; }
 .event-scene-sign { display: block; margin-top: 30px; color: var(--accent-color); font-size: 3rem; line-height: 1; }
 .event-scene-figure { margin: 0; min-width: 0; position: relative; z-index: 1; }
 .event-scene-image-wrap { position: relative; overflow: hidden; aspect-ratio: 1.15; background: var(--surface-color); }
@@ -113,7 +113,7 @@
   .event-scene-story, .event-scene-reversed { grid-template-columns: 1fr; align-content: center; gap: 24px; }
   .event-scene-reversed .event-scene-copy, .event-scene-reversed .event-scene-figure { grid-column: auto; grid-row: auto; }
   .event-scene-copy h2 { font-size: clamp(2rem, 8vw, 3.5rem); margin-bottom: 16px; }
-  .event-scene-placeholder { font-size: 0.75rem; }
+  .event-scene-description { font-size: 0.75rem; }
   .event-scene-sign { position: absolute; right: 0; bottom: 0; margin: 0; font-size: 2.5rem; }
   .event-scene-figure figcaption { padding-top: 10px; font-size: 0.48rem; }
   .event-scene-image-wrap { aspect-ratio: 1.5; }

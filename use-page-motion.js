@@ -14,6 +14,8 @@ export function usePageMotion() {
     let frame = 0;
     let point = null;
 
+    root.classList.toggle("motion-ready", !reduced);
+
     function clearPress() {
       pressed?.classList.remove("is-pressed");
       pressed = null;
@@ -75,7 +77,11 @@ export function usePageMotion() {
       reduced = event.matches;
       if (reduced) {
         reset();
+        root.classList.remove("motion-ready");
         revealed.forEach((element) => element.classList.remove("motion-entered"));
+      } else {
+        root.classList.add("motion-ready");
+        revealed.forEach((element) => element.classList.add("motion-entered"));
       }
     }
 
@@ -86,7 +92,7 @@ export function usePageMotion() {
         revealed.add(target);
         observer.unobserve(target);
       });
-    }, { threshold: 0.08 }) : null;
+    }, { threshold: 0.12, rootMargin: "0px 0px -6%" }) : null;
 
     function observeReveals(node) {
       if (!(node instanceof Element) || !observer) return;
@@ -113,6 +119,7 @@ export function usePageMotion() {
 
     return () => {
       reset();
+      root.classList.remove("motion-ready");
       observer?.disconnect();
       mutations?.disconnect();
       revealed.forEach((element) => element.classList.remove("motion-entered"));

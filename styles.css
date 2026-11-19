@@ -81,9 +81,6 @@ h1, h2 { letter-spacing: -0.065em; line-height: 1; }
 }
 
 /* Oversized type and a monochrome cutout, crossed by a single orange band. */
-.hero-meta { display: flex; justify-content: space-between; padding-block: 23px; border-top: 1px solid var(--line-color); }
-.hero-meta > .eyebrow:first-child { display: flex; align-items: center; gap: 8px; }
-.status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent-color); }
 .hero-composition { position: relative; min-height: 620px; height: min(51vw, 730px); }
 .hero-copy { position: relative; z-index: 3; width: 55%; padding-top: 32px; pointer-events: none; }
 .hero-copy h1 { margin: 0; font-size: clamp(5rem, 10.4vw, 10.6rem); line-height: 0.89; letter-spacing: -0.075em; font-weight: 600; }
@@ -95,18 +92,11 @@ h1, h2 { letter-spacing: -0.065em; line-height: 1; }
 .hero-outline-word { position: absolute; top: 4%; left: 10%; color: transparent; -webkit-text-stroke: 1px var(--line-color); font-weight: 700; font-size: clamp(7rem, 16vw, 17rem); letter-spacing: -0.08em; line-height: 1; }
 .hero-orange-overlay { position: absolute; left: 5%; right: 0; top: 43%; height: 32%; background: var(--accent-color); }
 .hero-orange-overlay { z-index: 2; mix-blend-mode: multiply; pointer-events: none; }
-.hero-vertical-note { position: absolute; top: 15%; right: 0; writing-mode: vertical-rl; font-size: 0.6rem; font-weight: 600; letter-spacing: 0.1em; z-index: 3; }
-.hero-visual-index { position: absolute; right: 15px; bottom: 18px; font-size: 2.7rem; letter-spacing: -0.08em; z-index: 3; }
-.hero-bottom { display: flex; justify-content: space-between; gap: 16px; padding-block: 22px; border-block: 1px solid var(--line-color); font-size: 0.6rem; font-weight: 600; letter-spacing: 0.03em; }
-.hero-bottom a { display: flex; gap: 36px; }
-.hero-bottom a:hover { color: var(--accent-color); }
-.home-manifesto { display: grid; grid-template-columns: 1fr 2fr 1fr; gap: 30px; align-items: start; padding-block: clamp(70px, 9vw, 140px); }
-.home-manifesto > .eyebrow { padding-top: 7px; }
+.home-manifesto { display: grid; grid-template-columns: 2fr 1fr; gap: 30px; align-items: start; padding-block: clamp(70px, 9vw, 140px); }
 .home-manifesto h2 { margin: 0; font-size: clamp(2rem, 4.1vw, 4.3rem); line-height: 1.06; }
 .home-manifesto p { font-size: 0.8rem; margin: 0; padding-top: 7px; }
 .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 45px; }
 .section-heading h2 { font-size: clamp(2.5rem, 5.3vw, 5rem); margin: 0; }
-.section-heading > .eyebrow { padding-bottom: 4px; }
 .sport-catalog { padding-bottom: clamp(70px, 8vw, 120px); }
 .sport-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 38px 24px; }
 .sport-info { min-width: 0; }
@@ -127,8 +117,7 @@ h1, h2 { letter-spacing: -0.065em; line-height: 1; }
 .sport-image-fallback { position: absolute; inset: 0; display: flex; align-items: end; font-size: clamp(2rem, 5vw, 5rem); font-weight: 600; letter-spacing: -0.07em; line-height: 0.9; padding: 24px; color: var(--muted-color); overflow-wrap: anywhere; }
 .catalog-more { text-align: center; margin-top: 45px; }
 .quiz-invitation { background: var(--accent-color); }
-.quiz-invitation-inner { display: grid; grid-template-columns: 1fr 2fr 1fr; align-items: center; gap: 32px; padding-block: clamp(45px, 7vw, 95px); }
-.quiz-invitation .eyebrow { align-self: start; padding-top: 5px; }
+.quiz-invitation-inner { display: grid; grid-template-columns: 2fr 1fr; align-items: center; gap: 32px; padding-block: clamp(45px, 7vw, 95px); }
 .quiz-invitation h2 { font-size: clamp(2.5rem, 4.5vw, 4.5rem); margin: 0; }
 .quiz-invitation h2 span { color: var(--light-color); }
 .quiz-invitation .button { justify-self: end; white-space: nowrap; }
@@ -138,7 +127,7 @@ h1, h2 { letter-spacing: -0.065em; line-height: 1; }
 .home-event-image:hover img { transform: scale(1.04); }
 .round-arrow { position: absolute; bottom: 25px; right: 25px; display: grid; place-items: center; width: 64px; height: 64px; background: var(--accent-color); border-radius: 50%; font-size: 2rem; transition: rotate 250ms ease; }
 .home-event-image:hover .round-arrow { rotate: 45deg; }
-.home-event-copy h2 { font-size: clamp(3rem, 5.3vw, 5.5rem); margin: 30px 0 25px; }
+.home-event-copy h2 { font-size: clamp(3rem, 5.3vw, 5.5rem); margin: 0 0 25px; }
 .home-event-copy p { font-size: 0.85rem; margin-bottom: 12px; }
 .home-photo-credit { display: block; font-size: 0.55rem; color: var(--muted-color); margin-top: 26px; }
 .home-photo-credit a { text-decoration: underline; }
@@ -233,10 +222,7 @@ h1, h2 { letter-spacing: -0.065em; line-height: 1; }
   .hero-visual { left: 34%; }
   .hero-athlete { height: 93%; }
   .hero-orange-overlay { top: 42%; height: 30%; }
-  .home-manifesto { grid-template-columns: 1fr 2fr; }
-  .home-manifesto p { grid-column: 2; }
-  .quiz-invitation-inner { grid-template-columns: 1.3fr 2fr; }
-  .quiz-invitation .button { grid-column: 2; justify-self: start; }
+  .quiz-invitation .button { justify-self: end; }
   .quiz-layout { gap: 40px; grid-template-columns: 0.75fr 2fr; }
   .contact-layout { gap: 65px; }
   .contact-form-footer { align-items: start; flex-direction: column; }
@@ -247,8 +233,6 @@ h1, h2 { letter-spacing: -0.065em; line-height: 1; }
   .wordmark { font-size: 1.7rem; }
   .site-navigation { gap: 17px; }
   .nav-index { display: none; }
-  .hero-meta { padding-block: 20px; }
-  .hero-meta > .eyebrow:last-child { display: none; }
   .hero-composition { height: 600px; min-height: 0; }
   .hero-copy { width: 70%; padding-top: 20px; }
   .hero-copy h1 { font-size: clamp(4.7rem, 13vw, 6.5rem); }
@@ -257,10 +241,6 @@ h1, h2 { letter-spacing: -0.065em; line-height: 1; }
   .hero-athlete { height: 95%; left: 57%; }
   .hero-orange-overlay { left: 0; top: 49%; height: 27%; }
   .hero-outline-word { font-size: 9rem; top: 8%; }
-  .hero-vertical-note { right: 18px; }
-  .hero-visual-index { bottom: 12px; right: 18px; font-size: 2rem; }
-  .hero-bottom { font-size: 0.5rem; }
-  .hero-bottom > span:nth-child(2) { display: none; }
   .home-manifesto { grid-template-columns: 1fr; gap: 25px; }
   .home-manifesto p { grid-column: auto; }
   .home-manifesto h2 { font-size: 2.75rem; }
@@ -271,8 +251,7 @@ h1, h2 { letter-spacing: -0.065em; line-height: 1; }
   .quiz-invitation-inner { grid-template-columns: 1fr; gap: 28px; }
   .quiz-invitation .button { grid-column: auto; }
   .home-event { grid-template-columns: 1fr 1fr; gap: 30px; }
-  .home-event-copy h2 { font-size: 2.8rem; margin-top: 24px; }
-  .home-event-copy .eyebrow { font-size: 0.5rem; }
+  .home-event-copy h2 { font-size: 2.8rem; }
   .home-event-copy p { font-size: 0.75rem; }
   .home-event-image { aspect-ratio: 0.7; }
   .round-arrow { width: 48px; height: 48px; bottom: 15px; right: 15px; }
@@ -315,9 +294,6 @@ h1, h2 { letter-spacing: -0.065em; line-height: 1; }
   .hero-athlete { height: 100%; left: 58%; }
   .hero-orange-overlay { top: 45%; height: 28%; }
   .hero-outline-word { top: 8%; left: 0; font-size: 6rem; }
-  .hero-vertical-note { display: none; }
-  .hero-bottom { gap: 10px; }
-  .hero-bottom a { gap: 12px; }
   .sport-image-wrap { aspect-ratio: 0.85; }
   .sport-card-heading { align-items: start; padding-block: 12px; }
   .sport-card-heading h3 { font-size: 0.95rem; }
@@ -327,7 +303,6 @@ h1, h2 { letter-spacing: -0.065em; line-height: 1; }
   .home-event { grid-template-columns: 1fr; }
   .home-event-image { aspect-ratio: 1.2; }
   .home-event-copy h2 { font-size: 3.5rem; }
-  .home-event-copy .eyebrow { font-size: 0.65rem; }
   .page-title { font-size: 14vw; }
   .quiz-intro .page-title { font-size: 11.5vw; }
   .quiz-intro { padding-bottom: 30px; }

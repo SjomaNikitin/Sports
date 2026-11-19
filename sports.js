@@ -39,7 +39,7 @@ export const sports = [
       cost: ["medium"],
     },
     description: "Dynamiczna gra rakietowa, zwykle dla czterech osób, łącząca elementy tenisa i squasha.",
-    imageUrl: "https://umtychy.pl/media/photos/10017590/original.jpg",
+    imageUrl: "https://cdn.4f.com.pl/media/magefan_blog/jak-zaczac-grac-w-padla.jpg",
   },
   {
     name: "Bike polo",

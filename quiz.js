@@ -1,62 +1,38 @@
 export const quizQuestions = [
   {
-    id: "activity", title: "Forma aktywności",
+    id: "activity",
+    title: "Jak chcesz uprawiać sport?",
     options: [
-      { value: "solo", label: "Indywidualnie" },
-      { value: "team", label: "Drużynowo" },
-      { value: "pairs", label: "W parach" },
-      { value: "group-solo", label: "W grupie, ale indywidualnie" },
+      { value: "solo", label: "Samodzielnie" },
+      { value: "pairs", label: "Z jedną osobą" },
+      { value: "team", label: "W ekipie lub drużynie" },
     ],
   },
   {
-    id: "place", title: "Miejsce uprawiania",
+    id: "style",
+    title: "Co najbardziej Cię wciąga?",
+    options: [
+      { value: "game", label: "Gra i rywalizacja" },
+      { value: "skill", label: "Triki i rozwijanie techniki" },
+      { value: "precision", label: "Celność, balans i kontrola" },
+      { value: "endurance", label: "Tempo, wysiłek i wytrzymałość" },
+    ],
+  },
+  {
+    id: "place",
+    title: "Gdzie najchętniej się ruszasz?",
     options: [
       { value: "outdoor", label: "Na zewnątrz" },
-      { value: "indoor", label: "W hali" },
+      { value: "indoor", label: "Pod dachem" },
+      { value: "any", label: "Miejsce nie ma znaczenia", neutral: true },
     ],
   },
   {
-    id: "contact", title: "Kontakt fizyczny",
+    id: "access",
+    title: "Jak chcesz zacząć?",
     options: [
-      { value: "contact", label: "Sporty kontaktowe" },
-      { value: "non-contact", label: "Sporty bezkontaktowe" },
-      { value: "any", label: "Bez znaczenia", neutral: true },
-    ],
-  },
-  {
-    id: "equipment", title: "Sprzęt",
-    options: [
-      { value: "none", label: "Bez sprzętu" },
-      { value: "basic", label: "Podstawowy sprzęt" },
-      { value: "specialist", label: "Specjalistyczny sprzęt" },
-      { value: "any", label: "Nie mam preferencji", neutral: true },
-    ],
-  },
-  {
-    id: "conditions", title: "Warunki uprawiania",
-    options: [
-      { value: "partners", label: "Wymaga partnera lub zespołu" },
-      { value: "independent", label: "Można uprawiać samodzielnie" },
-      { value: "infrastructure", label: "Potrzebna jest infrastruktura sportowa" },
-      { value: "anywhere", label: "Można uprawiać niemal wszędzie" },
-    ],
-  },
-  {
-    id: "season", title: "Pora roku",
-    options: [
-      { value: "year-round", label: "Cały rok" },
-      { value: "summer", label: "Lato" },
-      { value: "winter", label: "Zima" },
-      { value: "seasonal", label: "Sport sezonowy, bez preferencji" },
-    ],
-  },
-  {
-    id: "cost", title: "Koszt rozpoczęcia",
-    options: [
-      { value: "low", label: "Niski" },
-      { value: "medium", label: "Średni" },
-      { value: "high", label: "Wysoki" },
-      { value: "any", label: "Bez ograniczeń", neutral: true },
+      { value: "easy", label: "Od razu, z prostym sprzętem" },
+      { value: "organized", label: "Może być obiekt i specjalny sprzęt" },
     ],
   },
 ];
@@ -68,15 +44,20 @@ export function getRecommendations(sports, answers) {
 
   if (!isComplete) return [];
 
-  // Neutral answers satisfy every sport equally; all other answers have equal weight.
-  const rankedSports = sports.map((sport) => ({
-    sport,
-    matches: quizQuestions.filter((question) => {
-      const option = question.options.find((option) => option.value === answers[question.id]);
-      return option.neutral || sport.preferences[question.id]?.includes(option.value);
-    }),
-  }));
-  const bestScore = Math.max(0, ...rankedSports.map(({ matches }) => matches.length));
+  const answerKey = quizQuestions.map(({ id }) => answers[id]).join("|");
+  const tieBreaker = (name) => [...`${answerKey}|${name}`]
+    .reduce((hash, character) => ((hash * 31) + character.codePointAt(0)) >>> 0, 2166136261);
 
-  return rankedSports.filter(({ matches }) => matches.length === bestScore);
+  return sports
+    .map((sport) => ({
+      sport,
+      tie: tieBreaker(sport.name),
+      matches: quizQuestions.filter((question) => {
+        const option = question.options.find((item) => item.value === answers[question.id]);
+        return option.neutral || sport.preferences[question.id]?.includes(option.value);
+      }),
+    }))
+    .sort((left, right) => right.matches.length - left.matches.length || left.tie - right.tie)
+    .slice(0, 3)
+    .map(({ sport, matches }) => ({ sport, matches }));
 }

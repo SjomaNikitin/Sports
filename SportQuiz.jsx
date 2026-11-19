@@ -30,7 +30,7 @@ export default function SportQuiz() {
       <header class="quiz-intro" data-reveal>
         <span class="eyebrow">01 / ANKIETA</span>
         <h1 id="quiz-title" class="page-title">TWÓJ SPORT.<br />TWOJE ZASADY<span class="orange-dot">.</span></h1>
-        <p>Siedem pytań. Nowe możliwości.<br />Sprawdź, co pasuje do Ciebie.</p>
+        <p>Cztery krótkie pytania.<br />Sprawdź, co pasuje do Ciebie.</p>
       </header>
 
       <div class="quiz-layout">
@@ -103,8 +103,8 @@ export default function SportQuiz() {
           <h2 id="quiz-results-title" class="category-title" ref={resultHeading} tabIndex={-1}>Sporty dla Ciebie</h2>
           <p class="quiz-result-summary">
             {bestScore === quizQuestions.length
-              ? "Te sporty pasują do wszystkich Twoich odpowiedzi. Wybierz ten, który najbardziej Cię zaciekawi!"
-              : `Nie ma sportu pasującego do wszystkich odpowiedzi. Każda z najbliższych propozycji pasuje do ${bestScore} z ${quizQuestions.length} Twoich preferencji.`}
+              ? "Te propozycje najlepiej pasują do Twojego sposobu działania. Wybierz tę, która najbardziej Cię zaciekawi!"
+              : `Pokazujemy trzy najbliższe propozycje. Najlepsza pasuje do ${bestScore} z ${quizQuestions.length} Twoich odpowiedzi.`}
           </p>
           <p class="quiz-hint">Dostępność zależy od pogody i obiektów w Twojej okolicy.</p>
           <div class="sport-list">

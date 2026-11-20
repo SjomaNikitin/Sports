@@ -86,13 +86,15 @@ export function usePageMotion() {
     }
 
     const observer = "IntersectionObserver" in window ? new IntersectionObserver((entries) => {
-      entries.forEach(({ target, isIntersecting }) => {
-        if (!isIntersecting) return;
-        if (!reduced) target.classList.add("motion-entered");
-        revealed.add(target);
-        observer.unobserve(target);
+      entries.forEach(({ target, isIntersecting, boundingClientRect }) => {
+        if (isIntersecting) {
+          if (!reduced) target.classList.add("motion-entered");
+          revealed.add(target);
+        } else if (boundingClientRect.bottom <= 0) {
+          target.classList.remove("motion-entered");
+        }
       });
-    }, { threshold: 0.12, rootMargin: "0px 0px -6%" }) : null;
+    }, { threshold: [0, 0.12], rootMargin: "0px 0px -6%" }) : null;
 
     function observeReveals(node) {
       if (!(node instanceof Element) || !observer) return;
